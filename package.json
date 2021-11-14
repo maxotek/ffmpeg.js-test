@@ -1,0 +1,19 @@
+{
+  "name": "ffmpeg.js-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "package": "browserify index.js -o bundle.js",
+    "test": "jasmine"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^17.0.0"
+  },
+  "devDependencies": {
+    "jasmine": "^3.10.0"
+  }
+}
