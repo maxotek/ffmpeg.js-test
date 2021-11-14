@@ -73,6 +73,9 @@ describe("ffmpeg", function () {
         expect(result.MEMFS.length).toEqual(1);
         expect(result.MEMFS[0].data).not.toBeNull();
 
+        if (!fs.existsSync('out'))
+          fs.mkdirSync('out');
+          
         fs.writeFileSync(`out/test.${target}`, result.MEMFS[0].data);
       });
     }
