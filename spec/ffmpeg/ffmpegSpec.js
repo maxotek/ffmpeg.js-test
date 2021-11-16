@@ -19,6 +19,22 @@ describe("ffmpeg", function () {
     console.log(result)
     expect(result !== null).toBe(true);
   });
+  
+  it("displays muxers", function () {
+    const result = ffmpeg({
+      arguments: ["-muxers"],
+      print: function (data) { stdout += data + "\n"; },
+      printErr: function (data) { stderr += data + "\n"; },
+      onExit: function (code) {
+        console.log(stdout);
+        stdout = "";
+        stderr = "";
+      },
+    });
+
+    console.log(result)
+    expect(result !== null).toBe(true);
+  });
 
   describe("convert files", function () {
     convert = function (source, target, codec, format) {
@@ -53,6 +69,7 @@ describe("ffmpeg", function () {
         }
 
         arguments.push(`output.${target}`);
+        console.log(arguments.join(' '));
 
         const result = ffmpeg({
           arguments: arguments,
@@ -91,5 +108,6 @@ describe("ffmpeg", function () {
     convert('mp3', 'opus', 'libopus');
     convert('mp3', 'aiff', 'pcm_s16be');
     convert('mp3', 'mmf', 'adpcm_yamaha');
+    convert('mp3', 'wav', 'pcm_mulaw');
   });
 });
