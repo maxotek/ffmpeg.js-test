@@ -19,7 +19,7 @@ describe("ffmpeg", function () {
     console.log(result)
     expect(result !== null).toBe(true);
   });
-  
+
   it("displays muxers", function () {
     const result = ffmpeg({
       arguments: ["-muxers"],
@@ -54,7 +54,9 @@ describe("ffmpeg", function () {
           if (codec === 'adpcm_yamaha') {
             arguments.push('-ar');
             arguments.push('44100');
+          }
 
+          if (codec === 'vorbis' || codec === 'adpcm_yamaha') {
             arguments.push('-strict');
             arguments.push('-2');
           }
@@ -92,7 +94,7 @@ describe("ffmpeg", function () {
 
         if (!fs.existsSync('out'))
           fs.mkdirSync('out');
-          
+
         fs.writeFileSync(`out/test.${target}`, result.MEMFS[0].data);
       });
     }
@@ -101,6 +103,7 @@ describe("ffmpeg", function () {
     convert('mp3', 'wav');
     convert('mp3', 'aac', 'aac', 'mp4');
     convert('mp3', 'ogg', 'flac');
+    convert('mp3', 'ogg', 'vorbis');
     convert('mp3', 'm4a', 'alac');
     convert('mp3', 'm4r', 'aac', 'ipod');
     convert('mp3', 'flac', 'flac');
