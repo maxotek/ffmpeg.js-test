@@ -112,5 +112,7 @@ describe("ffmpeg", function () {
     convert('mp3', 'aiff', 'pcm_s16be');
     convert('mp3', 'mmf', 'adpcm_yamaha');
     convert('mp3', 'wav', 'pcm_mulaw');
+    
+    convert('wav', 'mp4', 'aac', 'mp4');
   });
 });
